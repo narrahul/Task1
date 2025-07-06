@@ -72,13 +72,13 @@ export default function Dashboard() {
             {/* User Profile Component */}
             <UserProfile user={user} setUser={setUser} />
             
-            {/* File Upload Form Component - Below Profile */}
-            <FileUploadForm onFileUploaded={handleFileUploaded} />
+            {/* Files List Component - Below Profile */}
+            <FilesList files={files} onFileDeleted={handleFileDeleted} />
           </div>
 
-          {/* Right Column - Files List */}
+          {/* Right Column - File Upload Form */}
           <div>
-            <FilesList files={files} onFileDeleted={handleFileDeleted} />
+            <FileUploadForm onFileUploaded={handleFileUploaded} />
           </div>
         </div>
       </div>
