@@ -27,6 +27,7 @@ A full-stack application for managing medical records with user authentication a
 - MySQL Database (Pomelo.EntityFrameworkCore.MySql)
 - BCrypt for Password Hashing
 - Session-based Authentication
+- DotNetEnv for Environment Variables
 
 ## Prerequisites
 
@@ -44,38 +45,46 @@ git clone <repository-url>
 cd medical-record-dashboard
 ```
 
-### 2. Database Setup
+### 2. Environment Configuration
 
-1. Make sure MySQL is running on your machine
-2. Create the database and tables:
-
-```bash
-mysql -u root -p < backend/database-schema.sql
-```
-
-3. Update the connection string in `backend/MedicalRecordAPI/appsettings.json`:
-
-```json
-"ConnectionStrings": {
-  "DefaultConnection": "Server=localhost;Database=MedicalRecordDB;User=root;Password=yourpassword;"
-}
-```
-
-### 3. Backend Setup
-
-1. Navigate to the backend directory:
+1. Navigate to the backend API directory:
 
 ```bash
 cd backend/MedicalRecordAPI
 ```
 
-2. Restore NuGet packages:
+2. Create a `.env` file with your database credentials:
+
+```env
+DB_SERVER=your-mysql-server
+DB_PORT=3306
+DB_DATABASE=MedicalRecordDB
+DB_USER=your-username
+DB_PASSWORD=your-password
+```
+
+3. Ensure the `.env` file is not committed to version control (already included in .gitignore)
+
+### 3. Database Setup
+
+1. Make sure MySQL is running on your machine
+2. Create the database and tables:
+
+```bash
+mysql -u root -p < ../../database-schema.sql
+```
+
+Note: The connection string is automatically built from environment variables in the `.env` file.
+
+### 4. Backend Setup
+
+1. In the backend API directory, restore NuGet packages:
 
 ```bash
 dotnet restore
 ```
 
-3. Run the backend API:
+2. Run the backend API:
 
 ```bash
 dotnet run
@@ -83,7 +92,7 @@ dotnet run
 
 The API will start at `http://localhost:5000`
 
-### 4. Frontend Setup
+### 5. Frontend Setup
 
 1. Open a new terminal and navigate to the frontend directory:
 
@@ -170,6 +179,8 @@ medical-record-dashboard/
 - File size limits
 - CORS configuration
 - Input validation
+- Environment variables for sensitive data (database credentials)
+- .gitignore configured to exclude sensitive files
 
 ## Development Notes
 
@@ -177,3 +188,15 @@ medical-record-dashboard/
 - Uploaded files are stored in `wwwroot/uploads` directory
 - Profile images are stored in `wwwroot/profile-images` directory
 - All API responses include proper error handling and status codes
+- Database credentials are loaded from `.env` file using DotNetEnv package
+- Never commit `.env` files or `appsettings.*.json` files with real credentials
+
+## Environment Variables
+
+The application requires the following environment variables in the `.env` file:
+
+- `DB_SERVER` - MySQL server hostname or IP
+- `DB_PORT` - MySQL server port (default: 3306)
+- `DB_DATABASE` - Database name
+- `DB_USER` - Database username
+- `DB_PASSWORD` - Database password
