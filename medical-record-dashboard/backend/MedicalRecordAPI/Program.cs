@@ -77,4 +77,6 @@ using (var scope = app.Services.CreateScope())
     DatabaseInitializer.Initialize(context);
 }
 
+app.MapGet("/", () => "Medical Record API is running!");
+
 app.Run();
