@@ -53,7 +53,7 @@ export default function UserProfile({ user, setUser }) {
           <div className="w-20 h-20 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden">
             {user?.profileImagePath ? (
               <img
-                src={`http://localhost:5000${user.profileImagePath}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:5000'}${user.profileImagePath}`}
                 alt="Profile"
                 className="w-full h-full object-cover"
               />

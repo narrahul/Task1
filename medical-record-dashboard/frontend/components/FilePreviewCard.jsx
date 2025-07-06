@@ -5,7 +5,8 @@ import api from '@/lib/axios';
 
 export default function FilePreviewCard({ file, onDelete }) {
   const handleViewFile = () => {
-    const fileUrl = `http://localhost:5000/api/file/${file.id}`;
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+    const fileUrl = `${baseUrl}/file/${file.id}`;
     window.open(fileUrl, '_blank');
   };
 
