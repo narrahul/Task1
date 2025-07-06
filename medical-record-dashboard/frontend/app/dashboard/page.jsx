@@ -67,15 +67,17 @@ export default function Dashboard() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
-          {/* User Profile Component - Left Side */}
-          <UserProfile user={user} setUser={setUser} />
-
-          {/* File Management Section - Right Side */}
+          {/* Left Column */}
           <div className="space-y-6">
-            {/* File Upload Form Component */}
+            {/* User Profile Component */}
+            <UserProfile user={user} setUser={setUser} />
+            
+            {/* File Upload Form Component - Below Profile */}
             <FileUploadForm onFileUploaded={handleFileUploaded} />
+          </div>
 
-            {/* Files List Component - Bottom Section */}
+          {/* Right Column - Files List */}
+          <div>
             <FilesList files={files} onFileDeleted={handleFileDeleted} />
           </div>
         </div>
